@@ -5,7 +5,7 @@ const util = require('util');
 
 const { exec } = mongoose.Query.prototype;
 // Setup REDIS + promisify get function
-const redisUrl = `${cacheServer.host}:${cacheServer.port}`;
+const redisUrl = `redis://${cacheServer.host}:${cacheServer.port}`;
 const client = redis.createClient(redisUrl);
 client.hget = util.promisify(client.hget);
 
