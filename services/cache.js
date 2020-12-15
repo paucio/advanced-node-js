@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const cacheServer = require('../config/cacheServer');
 const redis = require('redis');
 const util = require('util');
 
 const { exec } = mongoose.Query.prototype;
 // Setup REDIS + promisify get function
-const redisUrl = 'redis://127.0.0.1:6379';
+const redisUrl = `${cacheServer.host}:${cacheServer.port}`;
 const client = redis.createClient(redisUrl);
 client.hget = util.promisify(client.hget);
 
@@ -39,7 +40,7 @@ mongoose.Query.prototype.exec = async function execAndCache(...args) {
     const doc = JSON.parse(cachedValue);
 
     /* eslint-disable */
-    const cachedDocument = Array.isArray(doc) 
+    const cachedDocument = Array.isArray(doc)
       ? doc.map(d => new this.model(d))
       : new this.model(doc);
     /* eslint-enable */
