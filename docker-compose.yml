@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+  mongo:
+    image: mongo:3.6.21
+    container_name: mongo
+    hostname: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
