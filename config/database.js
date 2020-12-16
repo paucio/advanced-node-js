@@ -13,13 +13,14 @@ const options = {
 
 const init = async () => {
   /* MONGOOSE SETUP */
-  const connectionString = `mongodb://${db.host}:${db.port}/blog_everyone:`;
+  const connectionString = `mongodb://${db.host}:${db.port}/blog_everyone`;
 
-  await mongoose.connect(connectionString, options).catch(() => {
-    console.log(`Error connecting to mongo ${connectionString}`);
-  });
+  try {
+    await mongoose.connect(connectionString, options);
+  } catch (e) {
+    console.log(`Error connecting to mongo ${connectionString}, ${e.message}`);
+  }
 };
-
 
 module.exports = {
   init
