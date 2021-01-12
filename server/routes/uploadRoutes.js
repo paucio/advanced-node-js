@@ -1,6 +1,6 @@
 const uuid = require('uuid/v1');
 const requireLogin = require('../middlewares/requireLogin');
-const s3 =  require('../services/aws');
+const s3 = require('../services/aws');
 
 module.exports = (app) => {
   app.get('/api/upload', requireLogin, (req, res) => {
