@@ -22,6 +22,10 @@ const init = async () => {
   }
 };
 
+mongoose.connection.on('open', function () {
+  console.log('Connected to Database (MongoDB) ');
+});
+
 module.exports = {
   init
 };
