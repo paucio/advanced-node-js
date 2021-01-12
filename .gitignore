@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/node,vscode,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,vscode,intellij
 
@@ -225,16 +224,4 @@ dist
 !.vscode/extensions.json
 *.code-workspace
 
-# Cypress
-cypress/videos
-cypress/screenshots
-
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode,intellij
-
-nohup.out
-.DS_Store
-config/dev.js
-client/.babelrc
-dev.js
-config/dev.js
-config/secret.js
