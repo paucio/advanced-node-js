@@ -8,8 +8,8 @@ import formFields from './formFields';
 
 class BlogForm extends Component {
   renderFields() {
-    return _.map(formFields, ({ label, name }) => {
-      return (
+    return _.map(formFields, ({ label, name }) =>
+      (
         <Field
           key={name}
           component={BlogField}
@@ -17,8 +17,7 @@ class BlogForm extends Component {
           label={label}
           name={name}
         />
-      );
-    });
+      ));
   }
 
   render() {
