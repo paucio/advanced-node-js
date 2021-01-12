@@ -1,4 +1,4 @@
-import { StatusCodes } from "http-status-codes";
+const HttpStatus = require('http-status-codes');
 
 module.exports = (req, res, next) => {
   if (!req.user) {
