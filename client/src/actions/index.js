@@ -18,10 +18,7 @@ export const submitBlog = (values, file, history) => async (dispatch) => {
       'Content-Type': file.type
     }
   });
-  const res = await axios.post('/api/blogs', {
-    ...values,
-    imageKey: uploadConfig.data.Key
-  });
+  const res = await axios.post('/api/blogs', values);
   history.push('/blogs');
   dispatch({ type: FETCH_BLOG, payload: res.data });
 };
