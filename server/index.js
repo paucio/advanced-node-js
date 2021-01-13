@@ -1,41 +1,23 @@
-const express = require('express');
-const database = require('./config/database');
-const path = require('path');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const bodyParser = require('body-parser');
-const keys = require('./config/keys');
+const app = require('./server');
 
-require('./models/User');
-require('./models/Blog');
-require('./services/passport');
-require('./services/cache');
 
-const app = express();
+// Start server
+const port = normalizePort(process.env.APP_PORT || 5000);
+app.listen(port);
+console.log(`Express server started on port: ${port}`);
 
-app.use(bodyParser.json());
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+// Normalize a port into a number, string, or false.
+function normalizePort(val) {
+    var port = parseInt(val, 10);
 
-require('./routes/authRoutes')(app);
-require('./routes/blogRoutes')(app);
-require('./routes/uploadRoutes')(app);
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-if (['production'].includes(process.env.NODE_ENV)) {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve('client', 'build', 'index.html'));
-  });
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+    return false;
 }
-
-database.init().then(() => {
-  const port = process.env.APP_PORT || 5000;
-  app.listen(port);
-  console.log(`Listening on port ${port}`);
-});

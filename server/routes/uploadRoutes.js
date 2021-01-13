@@ -1,15 +1,6 @@
-const AWS = require('aws-sdk');
 const uuid = require('uuid/v1');
-
 const requireLogin = require('../middlewares/requireLogin');
-const { accessKeyId, secretAccessKey } = require('../config/keys');
-
-const s3 = new AWS.S3({
-  accessKeyId,
-  secretAccessKey,
-  signatureVersion: 'v4',
-  region: 'us-east-1'
-});
+const s3 = require('../services/aws');
 
 module.exports = (app) => {
   app.get('/api/upload', requireLogin, (req, res) => {
