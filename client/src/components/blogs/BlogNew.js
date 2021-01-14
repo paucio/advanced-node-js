@@ -12,26 +12,14 @@ class BlogNew extends Component {
 
   renderContent() {
     if (this.state.showFormReview) {
-      return (
-        <BlogFormReview
-          onCancel={() => this.setState({ showFormReview: false })}
-        />
-      );
+      return <BlogFormReview onCancel={() => this.setState({ showFormReview: false })} />;
     }
 
-    return (
-      <BlogForm
-        onBlogSubmit={() => this.setState({ showFormReview: true })}
-      />
-    );
+    return <BlogForm onBlogSubmit={() => this.setState({ showFormReview: true })} />;
   }
 
   render() {
-    return (
-      <div>
-        {this.renderContent()}
-      </div>
-    );
+    return <div>{this.renderContent()}</div>;
   }
 }
 

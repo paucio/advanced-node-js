@@ -10,7 +10,7 @@ class BlogFormReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       file: null
+      file: null
     };
   }
 
@@ -29,13 +29,12 @@ class BlogFormReview extends Component {
   renderFields() {
     const { formValues } = this.props;
 
-    return _.map(formFields, ({ name, label }) =>
-      (
-        <div key={name}>
-          <label>{label}</label>
-          <div>{formValues[name]}</div>
-        </div>
-      ));
+    return _.map(formFields, ({ name, label }) => (
+      <div key={name}>
+        <label>{label}</label>
+        <div>{formValues[name]}</div>
+      </div>
+    ));
   }
 
   renderButtons() {
@@ -43,10 +42,7 @@ class BlogFormReview extends Component {
 
     return (
       <div>
-        <button
-          className="yellow darken-3 white-text btn-flat"
-          onClick={onCancel}
-        >
+        <button className="yellow darken-3 white-text btn-flat" onClick={onCancel}>
           Back
         </button>
         <button className="green btn-flat right white-text">
@@ -57,18 +53,13 @@ class BlogFormReview extends Component {
     );
   }
 
-
   render() {
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
         <h5>Please confirm your entries</h5>
         {this.renderFields()}
         <h5>Add an image</h5>
-        <input
-          onChange={this.onFileChange.bind(this)}
-          type="file"
-          accept="image/*"
-        />
+        <input onChange={this.onFileChange.bind(this)} type="file" accept="image/*" />
         {this.renderButtons()}
       </form>
     );
