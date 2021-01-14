@@ -1,7 +1,8 @@
+const prod = require('./prod');
+const secret = require('./secret');
+
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./prod');
-} else if (process.env.NODE_ENV === 'ci') {
-  module.exports = require('./ci');
+  module.exports = prod;
 } else {
-  module.exports = require('./secret');
+  module.exports = secret;
 }
