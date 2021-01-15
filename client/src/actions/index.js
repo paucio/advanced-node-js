@@ -17,9 +17,7 @@ export const submitBlog = (values, file, history) => async (dispatch) => {
     headers: {
       'Content-Type': file.type
     }
-  }).catch(error =>
-    (console.log(error))
-  );
+  });
   const res = await axios.post('/api/blogs', values);
   history.push('/blogs');
   dispatch({ type: FETCH_BLOG, payload: res.data });
