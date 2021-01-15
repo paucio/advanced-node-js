@@ -10,8 +10,8 @@ class BlogList extends Component {
   }
 
   renderBlogs() {
-    return map(this.props.blogs, blog => {
-      return (
+    return map(this.props.blogs, blog =>
+      (
         <div className="card darken-1 horizontal" key={blog._id}>
           <div className="card-stacked">
             <div className="card-content">
@@ -23,8 +23,8 @@ class BlogList extends Component {
             </div>
           </div>
         </div>
-      );
-    });
+      )
+    );
   }
 
   render() {
