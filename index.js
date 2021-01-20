@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -12,7 +13,24 @@ require('./services/passport');
 require('./services/cache');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { useMongoClient: true });
+mongoose
+  .connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  })
+  .then(() => {
+    console.log('connected to mongodb');
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log('Listening on port', PORT);
+    });
+    console.log('server listening');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const app = express();
 
@@ -36,8 +54,3 @@ if (['production'].includes(process.env.NODE_ENV)) {
     res.sendFile(path.resolve('client', 'build', 'index.html'));
   });
 }
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log('Listening on port', PORT);
-});

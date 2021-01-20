@@ -11,7 +11,6 @@ afterEach(async () => {
   await page.close();
 });
 
-
 describe('When logged in', async () => {
   beforeEach(async () => {
     await page.login();
@@ -88,4 +87,3 @@ describe('Not logged in', async () => {
 });
 
 /* eslint-enable no-undef */
-

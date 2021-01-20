@@ -1,4 +1,3 @@
-
 require('../models/User');
 
 /* eslint-disable-next-line no-undef */
