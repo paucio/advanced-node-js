@@ -10,7 +10,7 @@ class BlogFormReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       file: null
+      file: null
     };
   }
 
@@ -32,7 +32,7 @@ class BlogFormReview extends Component {
     return _.map(formFields, ({ name, label }) =>
       (
         <div key={name}>
-          <label>{label}</label>
+          <span>{label}</span>
           <div>{formValues[name]}</div>
         </div>
       ));
