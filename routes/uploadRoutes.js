@@ -8,14 +8,14 @@ const s3 = new AWS.S3({
   accessKeyId,
   secretAccessKey,
   signatureVersion: 'v4',
-  region: 'us-east-2'
+  region: 'us-west-1'
 });
 
 module.exports = (app) => {
   app.get('/api/upload', requireLogin, (req, res) => {
-    const Key = `${req.user.id}/${req.query.Key}.jpeg`;
+    const Key = `${req.user.id}/${uuid()}.jpeg`;
     s3.getSignedUrl('putObject', {
-      Bucket: 'advancednodebucket',
+      Bucket: 'course-blog-bucket',
       ContentType: 'image/jpeg',
       Key
     }, (err, url) => res.send({ Key, url }));
