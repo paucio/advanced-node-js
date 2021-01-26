@@ -1,17 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const cleanCache = require('../middlewares/cleanCache');
-const uuid = require('uuid/v1');
-
-const { accessKeyId, secretAccessKey } = require('../config/keys');
-const AWS = require('aws-sdk');
-
-const s3 = new AWS.S3({
-  accessKeyId,
-  secretAccessKey,
-  signatureVersion: 'v4',
-  region: 'us-east-2'
-});
 
 const Blog = mongoose.model('Blog');
 module.exports = (app) => {
@@ -20,15 +9,6 @@ module.exports = (app) => {
       _user: req.user.id,
       _id: req.params.id
     });
-
-    let key = `${req.user.id}/${blog.imguuid}.jpeg`;
-    let params = {
-      Bucket: 'advancednodebucket',
-      ResponseContentType: 'image/jpeg',
-      Key: key
-    };
-
-    s3.getSignedUrl('getObject', params, (err, url) => { if (err) console.log(err); else console.log("The url is: ", url); });
 
     res.send(blog);
   });
@@ -42,11 +22,10 @@ module.exports = (app) => {
 
   app.post('/api/blogs', requireLogin, cleanCache, async (req, res) => {
     const { title, content } = req.body;
-    imguuid = uuid();
+
     const blog = new Blog({
       title,
       content,
-      imguuid,
       _user: req.user.id
     });
 
