@@ -13,7 +13,7 @@ const s3 = new AWS.S3({
 
 module.exports = (app) => {
   app.get('/api/upload', requireLogin, (req, res) => {
-    const Key = `${req.user.id}/${uuid()}.jpeg`;
+    const Key = `${req.user.id}/${req.query.Key}.jpeg`;
     s3.getSignedUrl('putObject', {
       Bucket: 'advancednodebucket',
       ContentType: 'image/jpeg',
