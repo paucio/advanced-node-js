@@ -13,11 +13,13 @@ class BlogShow extends Component {
     }
 
     const { title, content } = this.props.blog;
+    const url = this.props.url;
 
     return (
       <div>
         <h3>{title}</h3>
         <p>{content}</p>
+        <img src={url} />
       </div>
     );
   }
