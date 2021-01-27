@@ -12,14 +12,13 @@ class BlogShow extends Component {
       return '';
     }
 
-    const { title, content } = this.props.blog;
-    const url = this.props.url;
+    const { title, content, signedUrl } = this.props.blog;
 
     return (
       <div>
         <h3>{title}</h3>
         <p>{content}</p>
-        <img src={url} />
+        <img src={signedUrl} width = "500" height = "500"/>
       </div>
     );
   }

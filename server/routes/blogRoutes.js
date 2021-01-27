@@ -27,10 +27,10 @@ module.exports = (app) => {
       ResponseContentType: 'image/jpeg',
       Key: key
     };
-
-    s3.getSignedUrl('getObject', params, (err, url) => { if (err) console.log(err); else console.log("The url is: ", url); });
-
-    res.send(blog);
+    let signedUrl = s3.getSignedUrl('getObject', params);
+    blogObj = blog.toObject();
+    blogObj["signedUrl"] = signedUrl;
+    res.send(blogObj);
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
