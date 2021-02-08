@@ -28,9 +28,11 @@ mongoose.Query.prototype.exec = async function execAndCache(...args) {
   if (!this.useCache) {
     return exec.apply(this, args);
   }
-  const key = JSON.stringify(Object.assign({}, this.getQuery(), {
-    collection: this.mongooseCollection.name
-  }));
+  const key = JSON.stringify(
+    Object.assign({}, this.getQuery(), {
+      collection: this.mongooseCollection.name
+    })
+  );
   // Search cache.
   const cachedValue = await client.hget(this.hashKey, key);
   if (cachedValue) {
@@ -39,8 +41,8 @@ mongoose.Query.prototype.exec = async function execAndCache(...args) {
     const doc = JSON.parse(cachedValue);
 
     /* eslint-disable */
-    const cachedDocument = Array.isArray(doc) 
-      ? doc.map(d => new this.model(d))
+    const cachedDocument = Array.isArray(doc)
+      ? doc.map((d) => new this.model(d))
       : new this.model(doc);
     /* eslint-enable */
     return cachedDocument;
