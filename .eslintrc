@@ -1,20 +1,59 @@
 {
-  "extends": "airbnb",
-  "env":{
-      "browser": true,
-      "es6": true,
-      "node": true
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["airbnb-base"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-      "ecmaVersion": 6
+    "ecmaVersion": 2018
   },
-  "parser": "babel-eslint",
   "rules": {
-      "react/jsx-filename-extension":[1, {"extensions":[".js", ".jsx"]}],
-      "comma-dangle": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": 0,
-      "jsx-a11y/anchor-is-valid": 0,
-      "function-paren-newline": "off"
+    "max-len": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-template-curly-in-string": "off",
+    "function-paren-newline": "off",
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    "arrow-body-style": "off",
+    "no-restricted-syntax": "off",
+    "no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "guard-for-in": "off",
+    "no-tabs": "off",
+    "radix": "off",
+    "indent": [2, 2],
+    "arrow-parens": "as-needed",
+
+    "comma-dangle": [
+      "error",
+      {
+        "objects": "never"
+      }
+    ],
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": false,
+          "object": false
+        },
+        "AssignmentExpression": {
+          "array": true,
+          "object": false
+        }
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
+    "no-console": "off",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "object-shorthand": "off"
   }
 }
