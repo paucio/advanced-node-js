@@ -8,17 +8,15 @@ import formFields from './formFields';
 
 class BlogForm extends Component {
   renderFields() {
-    return _.map(formFields, ({ label, name }) => {
-      return (
-        <Field
-          key={name}
-          component={BlogField}
-          type="text"
-          label={label}
-          name={name}
-        />
-      );
-    });
+    return _.map(formFields, ({ label, name }) => (
+      <Field
+        key={name}
+        component={BlogField}
+        type="text"
+        label={label}
+        name={name}
+      />
+    ));
   }
 
   render() {
