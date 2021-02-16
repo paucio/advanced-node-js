@@ -20,4 +20,24 @@ const getBlogById = deps => async (userId, blogId) => {
   return blogObj;
 };
 
-module.exports = { getBlogById };
+const getBlogsByUserId = deps => async (userId) => {
+  const { Blog } = deps;
+
+  const blogs = await Blog
+    .find({ _user: userId })
+    .cache({ key: userId });
+    return blogs;
+}
+
+const postNewBlog = deps => async (title, content, imguuid, userId) => {
+  const { Blog } = deps;
+  const blog = new Blog({
+    title,
+    content,
+    imguuid,
+    _user: userId
+  });
+  return blog;
+}
+
+module.exports = { getBlogById, getBlogsByUserId, postNewBlog };
