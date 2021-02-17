@@ -11,7 +11,7 @@ describe('tests for blog controller', () => {
     s3Mock.getSignedUrl.mockResolvedValueOnce("");
 
     const spy = jest.spyOn(blogMock, 'findOne');
-    const spys3 = jest.spyOn(s3Mock, 'getSignedUrl')
+    const spys3 = jest.spyOn(s3Mock, 'getSignedUrl');
 
     const deps = { Blog: blogMock, s3: s3Mock };
 
