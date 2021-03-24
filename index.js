@@ -4,12 +4,11 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const keys = require('./config/keys');
+const keys = require('./src/config/keys');
 
-require('./models/User');
-require('./models/Blog');
-require('./services/passport');
-require('./services/cache');
+require('./src/models/User');
+require('./src/models/Blog');
+require('./src/config/cache');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -23,12 +22,11 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
+require('./src/config/passport.js')(app);
 
-require('./routes/authRoutes')(app);
-require('./routes/blogRoutes')(app);
-require('./routes/uploadRoutes')(app);
+require('./src/routes/authRoutes')(app);
+require('./src/routes/blogRoutes')(app);
+require('./src/routes/uploadRoutes')(app);
 
 if (['production'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
